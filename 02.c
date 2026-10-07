@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int main()
+int main(void)
 {
     double xA, xB, yA, yB, dA, dB, AB;
 
