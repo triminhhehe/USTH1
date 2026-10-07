@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#define EPS 1e-9
 
 double Dien_tich(double x1,double y1,double x2,double y2,double x3,double y3){
     return 0.5 * fabs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
@@ -15,7 +16,7 @@ int main(void)
     
 
     printf("Nhap toa do diem A: ");
-    scanf("%lf %lf", &xA, &yB);
+    scanf("%lf %lf", &xA, &yA);
 
     printf("Nhap toa do diem B: ");
     scanf("%lf %lf", &xB, &yB);
@@ -32,18 +33,18 @@ int main(void)
     double S2 = Dien_tich(xM, yM, xB, yB, xC, yC);   
     double S3 = Dien_tich(xM, yM, xC, yC, xA, yA);
 
-    if(S1+S2+S3>S){
-        printf("M nam ngoai");
-    }
 
-    if(S1+S2+S3 == S && (S1 ==0 || S2==0 || S3 ==0)){
-        printf("M nam tren canh");
+    if (S < EPS) {
+        printf("A, B, C thang hang, khong tao thanh tam giac\n");
+        return 0;
     }
-
-    if(S1+S2+S3 == S && (S1 >0, S2>0, S3>0)){
-        printf("M nam trong");
+    if (S1 + S2 + S3 - S > EPS) {
+        printf("M nam ngoai tam giac\n");
+    } else if (S1 < EPS || S2 < EPS || S3 < EPS) {
+        printf("M nam tren canh tam giac ABC\n");
+    } else {
+        printf("M nam trong tam giac\n");
     }
-
 
     return 0;
 }
